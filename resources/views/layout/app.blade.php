@@ -31,7 +31,7 @@
         <!-- CSS Files -->
         <link rel="stylesheet" href="{{url('theme/css/bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{url('theme/css/plugins.min.css')}}" />
-        <link rel="stylesheet" href="{{url('theme/css/kaiadmin.min.css')}}" />
+        <link rel="stylesheet" href="{{url('theme/css/kaiadmin.css')}}" />
         @stack("styles")
     </head>
     <body>

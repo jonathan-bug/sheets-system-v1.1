@@ -12,7 +12,6 @@ Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 // auth routes
 Route::middleware(AuthUser::class)->group(function () {
     Route::get('/', function () {
-        return 'dashbaord';
+        return view('pages.example');
     })->name('dashboard');
 });
-
