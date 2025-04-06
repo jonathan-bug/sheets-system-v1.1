@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="csrf-token" content="{{csrf_token()}}"/>
         <title>Iniciar Sesión</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
