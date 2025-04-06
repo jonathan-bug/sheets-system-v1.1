@@ -35,7 +35,9 @@
         @stack("styles")
     </head>
     <body>
-        @yield("content")
+        <div class="wrapper">
+            @yield("app")
+        </div>
 
         <!--   Core JS Files   -->
         <script src="{{url('theme/js/core/jquery-3.7.1.min.js')}}"></script>
