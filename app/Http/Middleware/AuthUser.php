@@ -16,6 +16,7 @@ class AuthUser
     public function handle(Request $request, Closure $next): Response
     {
         if($request->user()) {
+            session(['user' => $request->user()->name]);
             return $next($request);
         }
 

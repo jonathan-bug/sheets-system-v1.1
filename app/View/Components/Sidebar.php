@@ -22,7 +22,7 @@ class Sidebar extends Component
                 'key' => 'dashboard',
                 'route' => route('dashboard'),
                 'title' => 'Dashboard',
-                'icon' => 'fa-home',
+                'icon' => 'fa-chart-line',
                 'status' => false
             ], [
                 'key' => 'employees',

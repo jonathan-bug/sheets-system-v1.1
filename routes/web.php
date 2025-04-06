@@ -6,7 +6,7 @@ use App\Http\Middleware\AuthUser;
 
 // auth
 Route::get('/login', [AuthController::class, 'page'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
 // auth routes
