@@ -27,6 +27,7 @@ class PeriodController extends Controller
         if($validated->fails()) {
             $data = [
                 'message' => 'Unable to validate',
+                'errors' => $validated->errors(),
                 'status' => 400
             ];
 
@@ -38,7 +39,7 @@ class PeriodController extends Controller
         $data = [
             'message' => 'Period added successfully',
             'record' => $record,
-            'state' => 200
+            'status' => 200
         ];
 
         return $data;
@@ -89,6 +90,27 @@ class PeriodController extends Controller
 
         $data = [
             'message' => 'Period updated successfully',
+            'record' => $period,
+            'status' => 200
+        ];
+
+        return $data;
+    }
+
+    public function find($id) {
+        $period = Period::find($id);
+
+        if(!$period) {
+            $data = [
+                'message' => 'Period not found',
+                'status' => 400
+            ];
+
+            return $data;
+        }
+
+        $data = [
+            'message' => 'Period found',
             'record' => $period,
             'status' => 200
         ];

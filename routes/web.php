@@ -31,6 +31,7 @@ Route::middleware(AuthUser::class)->group(function () {
 // period
 Route::get('/periods', [PeriodController::class, 'page'])->name('periods');
 Route::get('/api/periods', [PeriodController::class, 'index'])->name('api.periods.index');
+Route::get('/api/periods/{id}', [PeriodController::class, 'find'])->name('api.periods.find');
 Route::post('/api/periods', [PeriodController::class, 'store'])->name('api.periods.store');
 Route::delete('/api/periods/{id}', [PeriodController::class, 'destroy'])->name('api.periods.destroy');
 Route::put('/api/periods/{id}', [PeriodController::class, 'update'])->name('api.periods.update');

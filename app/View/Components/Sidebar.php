@@ -32,7 +32,7 @@ class Sidebar extends Component
                 'status' => false
             ], [
                 'key' => 'periods',
-                'route' => '#',
+                'route' => route('periods'),
                 'title' => 'Periodos',
                 'icon' => 'fa-calendar',
                 'status' => false
