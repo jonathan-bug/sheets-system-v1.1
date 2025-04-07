@@ -26,13 +26,12 @@
     </div>
     
     <!-- Navbar Header -->
-    <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+    <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom shadow-sm">
         <div class="container-fluid">
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                 <!-- User -->
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a
-                        data-bs-toggle="dropdown"
                         href="#"
                         aria-expanded="false"
                     >
@@ -50,7 +49,6 @@
                         href="{{route('logout')}}"
                         id="messageDropdown"
                         role="button"
-                        data-bs-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                     >

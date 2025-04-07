@@ -14,7 +14,7 @@
 </style>
 @endpush
 
-@section("content")
+@section("app")
     <div class="container">
         <div class="page-inner">
             <div class="row justify-content-center align-items-center">

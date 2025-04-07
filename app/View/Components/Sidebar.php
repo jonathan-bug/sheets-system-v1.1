@@ -26,7 +26,7 @@ class Sidebar extends Component
                 'status' => false
             ], [
                 'key' => 'employees',
-                'route' => '#',
+                'route' => route('employees'),
                 'title' => 'Empleados',
                 'icon' => 'fa-users',
                 'status' => false

@@ -33,14 +33,14 @@
                 @foreach($options as $option)
                     @if($option["status"])
                         <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="{{$option['route']}}">
+                            <a href="{{$option['route']}}">
                                 <i class="fas {{$option['icon']}}"></i>
                                 <p>{{$option['title']}}</p>
                             </a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="{{$option['route']}}">
+                            <a href="{{$option['route']}}">
                                 <i class="fas {{$option['icon']}}"></i>
                                 <p>{{$option['title']}}</p>
                             </a>
