@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\HourController;
 use App\Http\Middleware\AuthUser;
 
 // auth
@@ -33,15 +34,22 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::post('/api/periods', [PeriodController::class, 'store'])->name('api.periods.store');
     Route::delete('/api/periods/{id}', [PeriodController::class, 'destroy'])->name('api.periods.destroy');
     Route::put('/api/periods/{id}', [PeriodController::class, 'update'])->name('api.periods.update');
+
+    // salaries
+    Route::get('/salaries/{dui}', [SalaryController::class, 'page'])->name('salaries');
+    Route::get('/api/salaries/{dui}', [SalaryController::class, 'index'])->name('api.salaries.index');
+    Route::get('/api/salaries/find/{id}', [SalaryController::class, 'find'])->name('api.salaries.find');
+    Route::delete('/api/salaries/{id}', [SalaryController::class, 'destroy'])->name('api.salaries.destroy');
+    Route::post('/api/salaries', [SalaryController::class, 'store'])->name('api.salaries.store');
+    Route::put('/api/salaries/{id}', [SalaryController::class, 'update'])->name('api.salaries.update');
 });
 
-// salaries
-Route::get('/salaries/{dui}', [SalaryController::class, 'page'])->name('salaries');
-Route::get('/api/salaries/{dui}', [SalaryController::class, 'index'])->name('api.salaries.index');
-Route::get('/api/salaries/find/{id}', [SalaryController::class, 'find'])->name('api.salaries.find');
-Route::delete('/api/salaries/{id}', [SalaryController::class, 'destroy'])->name('api.salaries.destroy');
-Route::post('/api/salaries', [SalaryController::class, 'store'])->name('api.salaries.store');
-Route::put('/api/salaries/{id}', [SalaryController::class, 'update'])->name('api.salaries.update');
+// hours
+Route::get('/api/hours/{dui}', [HourController::class, 'index'])->name('api.hours.index');
+Route::get('/api/hours/find/{id}', [HourController::class, 'find'])->name('api.hours.find');
+Route::delete('/api/hours/{id}', [HourController::class, 'destroy'])->name('api.hours.destroy');
+Route::post('/api/hours', [HourController::class, 'store'])->name('api.hours.store');
+Route::put('/api/hours/{id}', [HourController::class, 'update'])->name('api.hours.update');
 
 Route::get('/token', function () {
     return csrf_token();

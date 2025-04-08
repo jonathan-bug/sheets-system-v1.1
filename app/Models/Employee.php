@@ -27,6 +27,6 @@ class Employee extends Model
     }
 
     public function hours() {
-        $this->hasMany(Hour::class);
+        return $this->hasMany(Hour::class);
     }
 }
