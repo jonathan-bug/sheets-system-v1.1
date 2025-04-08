@@ -46,6 +46,7 @@
                         <table class="employees-table table table-striped table-hover">
                             <thead class="thead-light">
                                 <tr>
+                                    <th>DUI</th>
                                     <th>Primer Nombre</th>
                                     <th>Segundo Nombre</th>
                                     <th>Primer Apellido</th>
@@ -178,7 +179,10 @@
                 
                 response.forEach(employee => {
                     let row = ""
+                    let url = "{{route('salaries', '-')}}".replace("-", employee.dui)
+                    
                     row += "<tr>"
+                    row += `<td>${employee.dui}</td>`
                     row += `<td>${employee.first_name}</td>`
                     row += `<td>${employee.second_name}</td>`
                     row += `<td>${employee.first_lastname}</td>`
@@ -192,6 +196,9 @@
                     row += `<button class="btn btn-danger btn-icon" onclick="deleteEmployee('${employee.dui}')">`
                     row += `<i class="fa fa-trash"></i>`
                     row += `</button>`
+                    row += `<a class="btn btn-success btn-icon" href="${url}">`
+                    row += `<i class="fa fa-money-bill"></i>`
+                    row += `</a>`
                     row += `</td>`
                     row += "</tr>"
                     

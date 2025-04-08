@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 use App\Models\Employee;
 use App\Models\Salary;
 
 class SalaryController extends Controller
 {
+    public function page($dui) {
+        $employee = Employee::find($dui);
+        
+        return view('pages.salaries.index')->with(['employee' => $employee]);
+    }
+    
     public function index(string $dui) {
         $employee = Employee::find($dui);
         $salaries = $employee->salaries;
@@ -63,7 +70,6 @@ class SalaryController extends Controller
         $validated = Validator::make($request->all(), [
             'employee_dui' => 'required',
             'amount' => 'required',
-            'last' => 'required'
         ]);
 
         if($validated->fails()) {
@@ -76,7 +82,11 @@ class SalaryController extends Controller
             return $data;
         }
 
-        $record = Salary::create($request->all());
+        $lastDate = Carbon::now()->format('Y-m-d H:i:s');
+        
+        $record = $request->all();
+        $record['last'] = $lastDate;
+        $record = Salary::create($record);
 
         $data = [
             'message' => 'Salary added successfully',
@@ -91,7 +101,6 @@ class SalaryController extends Controller
         $validated = Validator::make($request->all(), [
             'employee_dui' => 'required',
             'amount' => 'required',
-            'last' => 'required'
         ]);
 
         if($validated->fails()) {
@@ -116,7 +125,6 @@ class SalaryController extends Controller
 
         $salary->employee_dui = $request->get('employee_dui');
         $salary->amount = $request->get('amount');
-        $salary->last = $request->get('last');
         $salary->save();
 
         $data = [

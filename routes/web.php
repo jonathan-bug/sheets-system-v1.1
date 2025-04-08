@@ -36,8 +36,9 @@ Route::middleware(AuthUser::class)->group(function () {
 });
 
 // salaries
-Route::get('/salaries', [SalaryController::class, 'page'])->name('salaries');
+Route::get('/salaries/{dui}', [SalaryController::class, 'page'])->name('salaries');
 Route::get('/api/salaries/{dui}', [SalaryController::class, 'index'])->name('api.salaries.index');
+Route::get('/api/salaries/find/{id}', [SalaryController::class, 'find'])->name('api.salaries.find');
 Route::delete('/api/salaries/{id}', [SalaryController::class, 'destroy'])->name('api.salaries.destroy');
 Route::post('/api/salaries', [SalaryController::class, 'store'])->name('api.salaries.store');
 Route::put('/api/salaries/{id}', [SalaryController::class, 'update'])->name('api.salaries.update');
