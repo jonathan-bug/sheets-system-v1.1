@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Middleware\AuthUser;
 
 // auth
@@ -33,6 +34,13 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::delete('/api/periods/{id}', [PeriodController::class, 'destroy'])->name('api.periods.destroy');
     Route::put('/api/periods/{id}', [PeriodController::class, 'update'])->name('api.periods.update');
 });
+
+// salaries
+Route::get('/salaries', [SalaryController::class, 'page'])->name('salaries');
+Route::get('/api/salaries/{dui}', [SalaryController::class, 'index'])->name('api.salaries.index');
+Route::delete('/api/salaries/{id}', [SalaryController::class, 'destroy'])->name('api.salaries.destroy');
+Route::post('/api/salaries', [SalaryController::class, 'store'])->name('api.salaries.store');
+Route::put('/api/salaries/{id}', [SalaryController::class, 'update'])->name('api.salaries.update');
 
 Route::get('/token', function () {
     return csrf_token();
