@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('hours', function (Blueprint $table) {
             $table->id();
-            $table->integer('hour');
+            $table->string('employee_dui');
+            $table->decimal('hour');
             $table->integer('type');
+            $table->foreign('employee_dui')
+                  ->references('dui')
+                  ->on('employees')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
