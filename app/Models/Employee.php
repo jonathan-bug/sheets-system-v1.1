@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Salary;
 
 class Employee extends Model
 {
@@ -19,4 +20,8 @@ class Employee extends Model
         'hiring_date',
         'calculated_date'
     ];
+
+    public function salaries() {
+        return $this->hasMany(Salary::class);
+    }
 }
