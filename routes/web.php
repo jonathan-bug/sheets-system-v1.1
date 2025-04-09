@@ -38,6 +38,7 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::post('/api/periods', [PeriodController::class, 'store'])->name('api.periods.store');
     Route::delete('/api/periods/{id}', [PeriodController::class, 'destroy'])->name('api.periods.destroy');
     Route::put('/api/periods/{id}', [PeriodController::class, 'update'])->name('api.periods.update');
+    Route::get('/api/periods/load/{id}', [PeriodController::class, 'load'])->name('api.periods.load');
 
     // salaries
     Route::get('/salaries/{dui}', [SalaryController::class, 'page'])->name('salaries');

@@ -136,4 +136,27 @@ class PeriodController extends Controller
 
         return $data;
     }
+
+    public function load($id) {
+        $period = Period::find($id);
+
+        if(!$period) {
+            $data = [
+                'message' => 'Period not found',
+                'status' => 400
+            ];
+
+            return $data;
+        }
+
+        session(['period' => $period]);
+        
+        $data = [
+            'message' => 'Period found',
+            'loaded' => $period,
+            'status' => 200
+        ];
+
+        return $data;
+    }
 }

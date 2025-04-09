@@ -97,6 +97,19 @@
 
 @push("scripts")
 <script>
+    // load period
+    function loadPeriod(id) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "{{route('api.periods.load', '-')}}".replace("-", id),
+            success: (response) => {
+                $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
+                fetchPeriods(response.loaded.id)
+            }
+        })
+    }
+    
     // modify period
     function modifyPeriod(id) {
         $.ajax({
@@ -129,7 +142,7 @@
                 });
 
                     $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
-                    fetchPeriods()
+                    fetchPeriods(response.loaded.id);
                 }else {
                     Swal.fire({
                         title: "¡Error!",
@@ -169,7 +182,7 @@
                             icon: "success"
                         });
                         $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
-                        fetchPeriods()
+                        fetchPeriods(response.loaded.id)
                     }else {
                         $(".modal-alert").removeClass("visually-hidden")
                         $(".modal-alert").find("ul").html("")
@@ -220,12 +233,13 @@
         }
     })
 
-    function fetchPeriods() {
+    function fetchPeriods(id = null) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: "{{route('api.periods.index')}}",
             success: (response) => {
+                $(".periods-table").find("tbody").html("")
                 response.forEach((period) => {
                     let row = ""
                     row += "<tr>"
@@ -238,6 +252,22 @@
                     row += `<button class="btn btn-danger btn-icon" onclick="deletePeriod('${period.id}')">`
                     row += `<i class="fa fa-trash"></i>`
                     row += `</button>`
+                    if(id) {
+                        if(period.id == id) {
+                            row += `<button class="btn btn-success btn-icon" onclick="loadPeriod('${period.id}')">`
+                            row += `<i class="fa fa-check"></i>`
+                            row += `</button>`
+                        }else {
+                            row += `<button class="btn btn-secondary btn-icon" onclick="loadPeriod('${period.id}')">`
+                            row += `<i class="fa fa-check"></i>`
+                            row += `</button>`
+                        }
+                    }else {
+                        row += `<button class="btn btn-secondary btn-icon" onclick="loadPeriod('${period.id}')">`
+                        row += `<i class="fa fa-check"></i>`
+                        row += `</button>`
+                    }
+                    
                     row += `</td>`
                     row += "</tr>"
 
@@ -252,7 +282,7 @@
     }
 
     $(() => {
-        fetchPeriods();
+        fetchPeriods("{{session('period')->id}}");
 
         $(".btn-add-period").click(() => {
             storePeriod()
