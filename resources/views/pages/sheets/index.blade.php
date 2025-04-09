@@ -36,9 +36,9 @@
                                 <button class="btn-export btn btn-label-secondary btn-sm me-2">
                                     <span>CSV</span>
                                 </button>
-                                <button class="btn btn-label-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modal">
+                                <a class="btn btn-label-primary btn-sm me-2" href="{{route('sheets.generate')}}" target="_blank">
                                     <span>Generar</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

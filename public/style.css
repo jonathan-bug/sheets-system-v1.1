@@ -1,0 +1,39 @@
+.page-break {
+    page-break-after: always;
+}
+
+.sheet-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: silver;
+}
+
+.sheet-divisor {
+    border-bottom: 1px solid silver;
+    margin-bottom: 4px;
+}
+
+.sheet-label-2, .sheet-value-2 {
+    color: #858585;
+}
+
+.sheet-value-2 {
+    color: #595959;
+    width: 50%;
+}
+
+.sheet-label-4, .sheet-value-4 {
+    width: 25%;
+}
+
+.sheet-label-4 {
+    color: #858585;    
+}
+
+.sheet-value-4 {
+    color: #595959;
+}
+
+td {
+    padding-bottom: 4px;
+}

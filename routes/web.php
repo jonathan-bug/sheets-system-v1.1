@@ -68,6 +68,7 @@ Route::middleware(AuthUser::class)->group(function () {
     // generate
     Route::get('/sheets', [SheetController::class, 'page'])->name('sheets');
     Route::get('/api/sheets', [SheetController::class, 'index'])->name('api.sheets.index');
+    Route::get('/sheets/generate', [SheetController::class, 'generate'])->name('sheets.generate');
 });
 
 Route::get('/token', function () {
