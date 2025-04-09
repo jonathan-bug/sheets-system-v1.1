@@ -10,6 +10,12 @@ use App\Models\Hour;
 class HourController extends Controller
 {
     // obtener el indice con la pagina en el url de la request
+    public function page($dui) {
+        $employee = Employee::find($dui);
+
+        return view('pages.hours.index')->with(['employee' => $employee]);
+    }
+    
     public function index($dui) {
         $employee = Employee::find($dui);
         $hours = $employee->hours;

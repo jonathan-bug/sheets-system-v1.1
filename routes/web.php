@@ -45,6 +45,7 @@ Route::middleware(AuthUser::class)->group(function () {
 });
 
 // hours
+Route::get('/hours/{dui}', [HourController::class, 'page'])->name('hours');
 Route::get('/api/hours/{dui}', [HourController::class, 'index'])->name('api.hours.index');
 Route::get('/api/hours/find/{id}', [HourController::class, 'find'])->name('api.hours.find');
 Route::delete('/api/hours/{id}', [HourController::class, 'destroy'])->name('api.hours.destroy');

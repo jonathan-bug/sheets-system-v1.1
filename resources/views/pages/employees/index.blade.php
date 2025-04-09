@@ -179,7 +179,8 @@
                 
                 response.forEach(employee => {
                     let row = ""
-                    let url = "{{route('salaries', '-')}}".replace("-", employee.dui)
+                    let salaries_url = "{{route('salaries', '-')}}".replace("-", employee.dui)
+                    let hours_url = "{{route('hours', '-')}}".replace("-", employee.dui)
                     
                     row += "<tr>"
                     row += `<td>${employee.dui}</td>`
@@ -196,8 +197,11 @@
                     row += `<button class="btn btn-danger btn-icon" onclick="deleteEmployee('${employee.dui}')">`
                     row += `<i class="fa fa-trash"></i>`
                     row += `</button>`
-                    row += `<a class="btn btn-success btn-icon" href="${url}">`
+                    row += `<a class="btn btn-success btn-icon" href="${salaries_url}">`
                     row += `<i class="fa fa-money-bill"></i>`
+                    row += `</a>`
+                    row += `<a class="btn btn-primary btn-icon" href="${hours_url}">`
+                    row += `<i class="fa fa-clock"></i>`
                     row += `</a>`
                     row += `</td>`
                     row += "</tr>"

@@ -11,7 +11,7 @@
             <div class="page-inner">
                 <!-- header -->
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Gestionar Salarios</h3>
+                    <h3 class="fw-bold mb-3">Gestionar Horas</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
                             <a href="#">
@@ -28,7 +28,7 @@
                             <i class="icon-arrow-right"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Salarios</a>
+                            <a href="#">Horas</a>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +38,7 @@
 
                     <div class="card-header">
                         <div class="card-head-row">
-                            <div class="card-title">Salarios de {{$employee->first_name}} {{$employee->first_lastname}}</div>
+                            <div class="card-title">Horas extras de {{$employee->first_name}} {{$employee->first_lastname}}</div>
                             <div class="card-tools">
                                 <button class="btn-export btn btn-label-secondary btn-sm me-2">
                                     <span>CSV</span>
@@ -52,11 +52,11 @@
                     
                     <div class="card-body p-0 table-responsive">
                         <!-- table -->
-                        <table class="salaries-table table table-striped table-hover">
+                        <table class="hours-table table table-striped table-hover">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Monto</th>
-                                    <th>Ultimo</th>
+                                    <th>Horas</th>
+                                    <th>Tipo</th>
                                     <th>Controles</th>
                                 </tr>
                             </thead>
@@ -86,13 +86,17 @@
                             <ul class="m-0 text-warning">
                             </ul>
                         </div>
-                        <label class="form-label" for="">Monto</label>
-                        <input class="form-control" name="amount" type="text" value=""/>
+                        <label class="form-label" for="">Horas</label>
+                        <input class="form-control" name="hour" type="text" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="">Tipo</label>
+                        <input class="form-control" name="type" type="text" value=""/>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn-add-salary btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn-add-hour btn btn-primary">Guardar Cambios</button>
                 </div>
             </div>
         </div>
@@ -102,58 +106,61 @@
 @push("scripts")
 <script>
     // modify period
-    function modifySalary(id) {
+    function modifyHour(id) {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "{{route('api.salaries.find', '-')}}".replace("-", id),
+            url: "{{route('api.hours.find', '-')}}".replace("-", id),
             success: (response) => {
                 $("input[name='id']").val(response.record.id)
-                $("input[name='amount']").val(response.record.amount)
-                $("input[name='last']").val(response.record.last)
+                $("input[name='hour']").val(response.record.hour)
+                $("input[name='type']").val(response.record.type)
 
                 $("#modal").modal("show")
             }
         })
     }
     
-    // delete salary
-    function deleteSalary(id) {
+    // delete hour
+    function deleteHour(id) {
         $.ajax({
             type: "DELETE",
             dataType: "json",
-            url: "{{route('api.salaries.destroy', '-')}}".replace("-", id),
+            url: "{{route('api.hours.destroy', '-')}}".replace("-", id),
             success: (response) => {
-                $(".salaries-table").find("tbody").html("")
+                $(".hours-table").find("tbody").html("")
                 Swal.fire({
                     title: "¡Exito!",
                     text: "Cambios Aplicados",
                     icon: "success"
                 });
-                fetchSalaries()
+                fetchHours()
             }
         })
     }
 
-    // store salary
-    function storeSalary() {
+    // store hour
+    function storeHour() {
         let data = {
             "employee_dui": $("input[name='employee_dui']").val(),
-            "amount": $("input[name='amount']").val()
+            "hour": $("input[name='hour']").val(),
+            "type": $("input[name='type']").val()
         }
 
         if($("input[name='id']").val() == "") {
-            $("#modal").find("input[name='amount']").val("")
+            $("#modal").find("input[name='hour']").val("")
+            $("#modal").find("input[name='type']").val("")
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "{{route('api.salaries.store')}}",
+                url: "{{route('api.hours.store')}}",
                 data: data,
                 success: (response) => {
                     console.log(response)
                     if(response.status == 200) {
-                        $(".salaries-table").find("tbody").html("")
-                        $("#modal").find("input[name='amount']").val("")
+                        $(".hours-table").find("tbody").html("")
+                        $("#modal").find("input[name='hour']").val("")
+                        $("#modal").find("input[name='type']").val("")
                         $(".modal-alert").addClass("visually-hidden")
                         $(".modal-alert").find("ul").html("")
                         $("#modal").modal("hide")
@@ -162,7 +169,7 @@
                             text: "Cambios Aplicados",
                             icon: "success"
                         });
-                        fetchSalaries()
+                        fetchHours()
                     }else {
                         $(".modal-alert").removeClass("visually-hidden")
                         $(".modal-alert").find("ul").html("")
@@ -177,12 +184,13 @@
             $.ajax({
                 type: "PUT",
                 dataType: "json",
-                url: "{{route('api.salaries.update', '-')}}".replace("-", $("input[name='id']").val()),
+                url: "{{route('api.hours.update', '-')}}".replace("-", $("input[name='id']").val()),
                 data: data,
                 success: (response) => {
                     if(response.status == 200) {
-                        $(".salaries-table").find("tbody").html("")
-                        $("#modal").find("input[name='amount']").val("")
+                        $(".hours-table").find("tbody").html("")
+                        $("#modal").find("input[name='hour']").val("")
+                        $("#modal").find("input[name='type']").val("")
                         $(".modal-alert").addClass("visually-hidden")
                         $(".modal-alert").find("ul").html("")
                         $("#modal").modal("hide")
@@ -192,7 +200,7 @@
                             text: "Cambios Aplicados",
                             icon: "success"
                         });
-                        fetchSalaries()
+                        fetchHours()
                     }else {
                         $(".modal-alert").removeClass("visually-hidden")
                         $(".modal-alert").find("ul").html("")
@@ -212,29 +220,28 @@
         }
     })
 
-    function fetchSalaries() {
+    function fetchHours() {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "{{route('api.salaries.index', '-')}}".replace("-", "{{$employee->dui}}"),
+            url: "{{route('api.hours.index', '-')}}".replace("-", "{{$employee->dui}}"),
             success: (response) => {
-                console.log(response)
-                response.forEach((salary) => {
+                response.forEach((hour) => {
                     let row = ""
                     row += "<tr>"
-                    row += `<td>$${salary.amount}</td>`
-                    row += `<td>${salary.last}</td>`
+                    row += `<td>${hour.hour}</td>`
+                    row += `<td>${hour.type}</td>`
                     row += `<td class="d-flex gap-2 justify-content-end">`
-                    row += `<button class="btn btn-warning btn-icon" onclick="modifySalary('${salary.id}')">`
+                    row += `<button class="btn btn-warning btn-icon" onclick="modifyHour('${hour.id}')">`
                     row += `<i class="fa fa-pen"></i>`
                     row += `</button>`
-                    row += `<button class="btn btn-danger btn-icon" onclick="deleteSalary('${salary.id}')">`
+                    row += `<button class="btn btn-danger btn-icon" onclick="deleteHour('${hour.id}')">`
                     row += `<i class="fa fa-trash"></i>`
                     row += `</button>`
                     row += `</td>`
                     row += "</tr>"
 
-                    $(".salaries-table").find("tbody").append(row)
+                    $(".hours-table").find("tbody").append(row)
                 })
 
                 $(".btn-export").click(() => {
@@ -245,10 +252,10 @@
     }
 
     $(() => {
-        fetchSalaries();
+        fetchHours();
 
-        $(".btn-add-salary").click(() => {
-            storeSalary()
+        $(".btn-add-hour").click(() => {
+            storeHour()
         })
     })
 </script>
