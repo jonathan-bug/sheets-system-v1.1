@@ -181,6 +181,7 @@
                     let row = ""
                     let salaries_url = "{{route('salaries', '-')}}".replace("-", employee.dui)
                     let hours_url = "{{route('hours', '-')}}".replace("-", employee.dui)
+                    let bonus_url = "{{route('bonus', '-')}}".replace("-", employee.dui)
                     
                     row += "<tr>"
                     row += `<td>${employee.dui}</td>`
@@ -202,6 +203,10 @@
                     row += `</a>`
                     row += `<a class="btn btn-primary btn-icon" href="${hours_url}">`
                     row += `<i class="fa fa-clock"></i>`
+                    row += `</a>`
+                    row += `</a>`
+                    row += `<a class="btn btn-secondary btn-icon" href="${bonus_url}">`
+                    row += `<i class="fa fa-money-check"></i>`
                     row += `</a>`
                     row += `</td>`
                     row += "</tr>"

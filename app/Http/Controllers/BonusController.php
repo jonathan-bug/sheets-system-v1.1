@@ -9,6 +9,12 @@ use App\Models\Bonus;
 
 class BonusController extends Controller
 {
+    public function page($dui) {
+        $employee = Employee::find($dui);
+
+        return view('pages.bonus.index')->with(['employee' => $employee]);
+    }
+    
     public function index($dui) {
         $employee = Employee::find($dui);
         $bonus = $employee->bonus;

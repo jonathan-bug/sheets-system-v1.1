@@ -54,6 +54,7 @@ Route::middleware(AuthUser::class)->group(function () {
 });
 
 // bonus
+Route::get('/bonus/{dui}', [BonusController::class, 'page'])->name('bonus');
 Route::get('/api/bonus/{dui}', [BonusController::class, 'index'])->name('api.bonus.index');
 Route::get('/api/bonus/find/{id}', [BonusController::class, 'find'])->name('api.bonus.find');
 Route::delete('/api/bonus/{id}', [BonusController::class, 'destroy'])->name('api.bonus.destroy');
