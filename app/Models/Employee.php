@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Salary;
 use App\Models\Hour;
+use App\Models\Bonus;
 
 class Employee extends Model
 {
@@ -28,5 +29,9 @@ class Employee extends Model
 
     public function hours() {
         return $this->hasMany(Hour::class);
+    }
+
+    public function bonus() {
+        return $this->hasMany(Bonus::class);
     }
 }
