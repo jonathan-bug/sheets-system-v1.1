@@ -10,7 +10,7 @@ class Loader {
         // if the period is not loaded 
         if(!session('period')) {
             // load the period
-            $period = Period::all()->sortBy('last')->first();
+            $period = Period::all()->sortBy('last')->last();
 
             // check if the period exists
             if($period) {
@@ -29,7 +29,7 @@ class Loader {
     // reload the period
     public static function reload() {
         try {
-            $period = Period::all()->sortBy('last')->first();
+            $period = Period::all()->sortBy('last')->last();
 
             session(['period' => $period]);
         }catch(Exception) {}

@@ -18,7 +18,10 @@ class HourController extends Controller
     
     public function index($dui) {
         $employee = Employee::find($dui);
-        $hours = $employee->hours;
+        
+        $hours = $employee->hours->filter(function ($record) {
+            return ($record->period_id == session('period')->id)? true: false;
+        })->values();
 
         return $hours;
     }
@@ -52,7 +55,10 @@ class HourController extends Controller
             return $data;
         }
 
-        $hour = Hour::create($request->all());
+        $record = $request->all();
+        $record['period_id'] = session('period')->id;
+        
+        $hour = Hour::create($record);
 
         $data = [
             'message' => 'Hour added successfully',

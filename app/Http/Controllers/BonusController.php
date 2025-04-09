@@ -17,7 +17,9 @@ class BonusController extends Controller
     
     public function index($dui) {
         $employee = Employee::find($dui);
-        $bonus = $employee->bonus;
+        $bonus = $employee->bonus->filter(function ($record) {
+            return ($record->period_id == session('period')->id)? true: false;
+        })->values();
 
         return $bonus;
     }
@@ -60,7 +62,10 @@ class BonusController extends Controller
             return $data;
         }
 
-        $bonus = Bonus::create($request->all());
+        $record = $request->all();
+        $record['period_id'] = session('period')->id;
+        
+        $bonus = Bonus::create($record);
 
         $data = [
             'message' => 'Bonus added successfully',

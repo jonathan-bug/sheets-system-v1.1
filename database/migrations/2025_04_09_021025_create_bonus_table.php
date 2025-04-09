@@ -14,10 +14,15 @@ return new class extends Migration
         Schema::create('bonus', function (Blueprint $table) {
             $table->id();
             $table->string('employee_dui');
+            $table->unsignedBigInteger('period_id');
             $table->decimal('amount');
             $table->foreign('employee_dui')
                   ->references('dui')
                   ->on('employees')
+                  ->onDelete('cascade');
+            $table->foreign('period_id')
+                  ->references('id')
+                  ->on('periods')
                   ->onDelete('cascade');
             $table->timestamps();
         });

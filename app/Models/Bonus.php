@@ -9,6 +9,7 @@ class Bonus extends Model
     protected $table = 'bonus';
     protected $fillable = [
         'employee_dui',
-        'amount',
+        'period_id',
+        'amount'
     ];
 }

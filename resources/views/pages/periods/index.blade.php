@@ -120,13 +120,23 @@
             dataType: "json",
             url: "{{route('api.periods.destroy', '-')}}".replace("-", id),
             success: (response) => {
-                $(".periods-table").find("tbody").html("")
+                if(response.status == 200) {
+                    $(".periods-table").find("tbody").html("")
                 Swal.fire({
                     title: "¡Exito!",
                     text: "Cambios Aplicados",
                     icon: "success"
                 });
-                fetchPeriods()
+
+                    $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
+                    fetchPeriods()
+                }else {
+                    Swal.fire({
+                        title: "¡Error!",
+                        text: "No puedes borrar el ultimo periodo",
+                        icon: "error"
+                    });
+                }
             }
         })
     }
@@ -158,6 +168,7 @@
                             text: "Cambios Aplicados",
                             icon: "success"
                         });
+                        $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
                         fetchPeriods()
                     }else {
                         $(".modal-alert").removeClass("visually-hidden")
@@ -188,6 +199,7 @@
                             text: "Cambios Aplicados",
                             icon: "success"
                         });
+                        $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
                         fetchPeriods()
                     }else {
                         $(".modal-alert").removeClass("visually-hidden")

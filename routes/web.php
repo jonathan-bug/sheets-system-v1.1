@@ -8,6 +8,7 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\HourController;
 use App\Http\Controllers\BonusController;
 use App\Http\Middleware\AuthUser;
+use App\Utility\Loader;
 
 // auth
 Route::get('/login', [AuthController::class, 'page'])->name('login');
@@ -17,6 +18,8 @@ Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 // auth routes
 Route::middleware(AuthUser::class)->group(function () {
     Route::get('/', function () {
+        Loader::load();
+        
         return view('pages.example');
     })->name('dashboard');
 

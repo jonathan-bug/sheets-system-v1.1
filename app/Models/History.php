@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hour extends Model
+class History extends Model
 {
-    protected $table = 'hours';
+    protected $table = 'histories';
     protected $fillable = [
         'employee_dui',
-        'period_id',
-        'hour',
-        'type'
+        'period_id'
     ];
 }

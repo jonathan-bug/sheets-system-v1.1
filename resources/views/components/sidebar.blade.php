@@ -57,6 +57,18 @@
                         </li>
                     @endif
                 @endforeach
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Periodo Actual</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="fas fa-check"></i>
+                        <p class="period-title">{{session("period")->month}} - {{session("period")->year}}</p>
+                    </a>
+                </li>                
             </ul>
         </div>
     </div>

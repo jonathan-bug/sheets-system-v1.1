@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Period;
+use App\Utility\Loader;
 
 class PeriodController extends Controller
 {
@@ -35,10 +36,12 @@ class PeriodController extends Controller
         }
 
         $record = Period::create($request->all());
+        Loader::reload();
         
         $data = [
             'message' => 'Period added successfully',
             'record' => $record,
+            'loaded' => session('period'),
             'status' => 200
         ];
 
@@ -46,12 +49,27 @@ class PeriodController extends Controller
     }
 
     public function destroy($id) {
-        $period = Period::find($id);
-        $period->delete();
+        $periods = count(Period::all());
 
+        if($periods > 1) {
+            $period = Period::find($id);
+            $period->delete();
+
+            Loader::reload();
+            
+            $data = [
+                'message' => 'Period deleted',
+                'status' => 200,
+                'loaded' => session('period')
+            ];
+
+            return $data;
+        }
+        
         $data = [
-            'message' => 'Period deleted',
-            'status' => 200
+            'message' => 'Period not deleted',
+            'status' => 400,
+            'loaded' => session('period')
         ];
 
         return $data;
@@ -91,6 +109,7 @@ class PeriodController extends Controller
         $data = [
             'message' => 'Period updated successfully',
             'record' => $period,
+            'loaded' => session('period'),
             'status' => 200
         ];
 

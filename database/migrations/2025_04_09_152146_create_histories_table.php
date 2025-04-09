@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hours', function (Blueprint $table) {
+        Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->string('employee_dui');
             $table->unsignedBigInteger('period_id');
-            $table->decimal('hour');
-            $table->integer('type');
             $table->foreign('employee_dui')
                   ->references('dui')
                   ->on('employees')
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hours');
+        Schema::dropIfExists('histories');
     }
 };
