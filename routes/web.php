@@ -7,6 +7,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\HourController;
 use App\Http\Controllers\BonusController;
+use App\Http\Controllers\SheetController;
 use App\Http\Middleware\AuthUser;
 use App\Utility\Loader;
 
@@ -55,16 +56,22 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::delete('/api/hours/{id}', [HourController::class, 'destroy'])->name('api.hours.destroy');
     Route::post('/api/hours', [HourController::class, 'store'])->name('api.hours.store');
     Route::put('/api/hours/{id}', [HourController::class, 'update'])->name('api.hours.update');
-});
 
-// bonus
-Route::get('/bonus/{dui}', [BonusController::class, 'page'])->name('bonus');
-Route::get('/api/bonus/{dui}', [BonusController::class, 'index'])->name('api.bonus.index');
-Route::get('/api/bonus/find/{id}', [BonusController::class, 'find'])->name('api.bonus.find');
-Route::delete('/api/bonus/{id}', [BonusController::class, 'destroy'])->name('api.bonus.destroy');
-Route::post('/api/bonus', [BonusController::class, 'store'])->name('api.bonus.store');
-Route::put('/api/bonus/{id}', [BonusController::class, 'update'])->name('api.bonus.update');
+    // bonus
+    Route::get('/bonus/{dui}', [BonusController::class, 'page'])->name('bonus');
+    Route::get('/api/bonus/{dui}', [BonusController::class, 'index'])->name('api.bonus.index');
+    Route::get('/api/bonus/find/{id}', [BonusController::class, 'find'])->name('api.bonus.find');
+    Route::delete('/api/bonus/{id}', [BonusController::class, 'destroy'])->name('api.bonus.destroy');
+    Route::post('/api/bonus', [BonusController::class, 'store'])->name('api.bonus.store');
+    Route::put('/api/bonus/{id}', [BonusController::class, 'update'])->name('api.bonus.update');
+
+    // generate
+    Route::get('/sheets', [SheetController::class, 'page'])->name('sheets');
+    Route::get('/api/sheets', [SheetController::class, 'index'])->name('api.sheets.index');
+});
 
 Route::get('/token', function () {
     return csrf_token();
 });
+
+

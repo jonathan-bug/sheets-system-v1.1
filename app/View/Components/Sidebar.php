@@ -38,7 +38,7 @@ class Sidebar extends Component
                 'status' => false
             ], [
                 'key' => 'sheets',
-                'route' => '#',
+                'route' => route('sheets'),
                 'title' => 'Hojas',
                 'icon' => 'fa-copy',
                 'status' => false

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 use App\Models\Period;
+use App\Models\Employee;
+use App\Models\History;
 use App\Utility\Loader;
 
 class PeriodController extends Controller
@@ -36,6 +39,24 @@ class PeriodController extends Controller
         }
 
         $record = Period::create($request->all());
+        
+        $employees = Employee::all();
+
+        forEach($employees as $employee) {
+            // if it is bigger then add new annuals
+            if(today() > new Carbon($employee->calculated_date)) {
+                // add annuals
+                History::create([
+                    'employee_dui' => $employee->dui,
+                    'period_id' => $record->id
+                ])->save();
+
+                // update employee calculated date
+                $employee->calculated_date = (new Carbon(today()))->addYear(1)->format('Y-m-d');
+                $employee->save();
+            }
+        }
+        
         Loader::reload();
         
         $data = [
