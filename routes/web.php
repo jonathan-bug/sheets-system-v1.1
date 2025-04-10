@@ -8,6 +8,7 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\HourController;
 use App\Http\Controllers\BonusController;
 use App\Http\Controllers\SheetController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\AuthUser;
 use App\Utility\Loader;
 
@@ -18,12 +19,6 @@ Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
 // auth routes
 Route::middleware(AuthUser::class)->group(function () {
-    Route::get('/', function () {
-        Loader::load();
-        
-        return view('pages.example');
-    })->name('dashboard');
-
     // employee
     Route::get('/employees', [EmployeeController::class, 'page'])->name('employees');
     Route::get('/api/employees', [EmployeeController::class, 'index'])->name('api.employees.index');
@@ -65,10 +60,13 @@ Route::middleware(AuthUser::class)->group(function () {
     Route::post('/api/bonus', [BonusController::class, 'store'])->name('api.bonus.store');
     Route::put('/api/bonus/{id}', [BonusController::class, 'update'])->name('api.bonus.update');
 
-    // generate
+    // sheets
     Route::get('/sheets', [SheetController::class, 'page'])->name('sheets');
     Route::get('/api/sheets', [SheetController::class, 'index'])->name('api.sheets.index');
     Route::get('/sheets/generate', [SheetController::class, 'generate'])->name('sheets.generate');
+
+    // dashboard
+    Route::get('/', [DashboardController::class, 'page'])->name('dashboard');
 });
 
 Route::get('/token', function () {
