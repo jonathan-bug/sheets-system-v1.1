@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="csrf-token" content="{{csrf_token()}}"/>
-        <title>Iniciar Sesión</title>
+        <title>@yield("page-title", "Iniciar Sesión")</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
         <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+        <link rel="icon" type="image/x-icon" href="/money.png">
 
         <!-- Fonts and icons -->
         <script src="{{url('theme/js/plugin/webfont/webfont.min.js')}}"></script>

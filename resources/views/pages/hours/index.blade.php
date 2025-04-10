@@ -1,5 +1,7 @@
 @extends("layout.app")
 
+@section("page-title", "Horas")
+
 @section("app")
     <x-sidebar current="employees"/>
 
@@ -14,7 +16,7 @@
                     <h3 class="fw-bold mb-3">Gestionar Horas</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
-                            <a href="#">
+                            <a href="{{route('dashboard')}}">
                                 <i class="icon-home"></i>
                             </a>
                         </li>
@@ -91,7 +93,12 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="">Tipo</label>
-                        <input class="form-control" name="type" type="text" value=""/>
+                        <!-- <input class="form-control" name="type" type="text" value=""/>  -->
+                        <select class="form-control" id="" name="type">
+                            <option value="1">Hora Extra Diurna</option>
+                            <option value="2">Hora Extra Nocturna</option>
+                            <option value="3">Hora Nocturnidad</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -114,7 +121,7 @@
             success: (response) => {
                 $("input[name='id']").val(response.record.id)
                 $("input[name='hour']").val(response.record.hour)
-                $("input[name='type']").val(response.record.type)
+                $("select[name='type']").val(response.record.type)
 
                 $("#modal").modal("show")
             }
@@ -144,7 +151,7 @@
         let data = {
             "employee_dui": $("input[name='employee_dui']").val(),
             "hour": $("input[name='hour']").val(),
-            "type": $("input[name='type']").val()
+            "type": $("select[name='type']").val()
         }
 
         if($("input[name='id']").val() == "") {
@@ -230,7 +237,19 @@
                     let row = ""
                     row += "<tr>"
                     row += `<td>${hour.hour}</td>`
-                    row += `<td>${hour.type}</td>`
+                    
+                    switch(hour.type) {
+                        case 1:
+                            row += `<td>Hora Extra Diurna</td>`
+                            break
+                        case 2:
+                            row += `<td>Hora Extra Nocturna</td>`
+                            break
+                        case 3:
+                            row += `<td>Hora Nocturna</td>`
+                            break
+                    }
+                    
                     row += `<td class="d-flex gap-2 justify-content-end">`
                     row += `<button class="btn btn-warning btn-icon" onclick="modifyHour('${hour.id}')">`
                     row += `<i class="fa fa-pen"></i>`

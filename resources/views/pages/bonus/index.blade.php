@@ -1,5 +1,7 @@
 @extends("layout.app")
 
+@section("page-title", "Bonus")
+
 @section("app")
     <x-sidebar current="employees"/>
 
@@ -11,10 +13,10 @@
             <div class="page-inner">
                 <!-- header -->
                 <div class="page-header">
-                    <h3 class="fw-bold mb-3">Gestionar Bonos</h3>
+                    <h3 class="fw-bold mb-3">Gestionar Bonos y Descuentos</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
-                            <a href="#">
+                            <a href="{{route('dashboard')}}">
                                 <i class="icon-home"></i>
                             </a>
                         </li>
@@ -28,17 +30,16 @@
                             <i class="icon-arrow-right"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Bonos</a>
+                            <a href="#">Bonos/Descuentos</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- content -->
                 <div class="card card-round shadow-sm">
-
                     <div class="card-header">
                         <div class="card-head-row">
-                            <div class="card-title">Bonos de {{$employee->first_name}} {{$employee->first_lastname}}</div>
+                            <div class="card-title">Bonos y Descuentos de {{$employee->first_name}} {{$employee->first_lastname}}</div>
                             <div class="card-tools">
                                 <button class="btn-export btn btn-label-secondary btn-sm me-2">
                                     <span>CSV</span>

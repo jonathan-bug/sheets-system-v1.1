@@ -1,5 +1,7 @@
 @extends("layout.app")
 
+@section("page-title", "Dashboard")
+
 @section("app")
     <x-sidebar current="dashboard"/>
 
@@ -14,7 +16,7 @@
                     <h3 class="fw-bold mb-3">Dashboard</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
-                            <a href="#">
+                            <a href="{{route('dashboard')}}">
                                 <i class="icon-home"></i>
                             </a>
                         </li>
@@ -36,7 +38,7 @@
                 <!-- content -->
                 <div class="row">
                     <div class="col-12 col-md-8">
-                        <div class="card card-round shadow-sm">
+                        <div class="card card-round shadow">
                             <div class="card-header">
                                 <div class="card-head-row">
                                     <div class="card-title">Devengos</div>
@@ -52,7 +54,7 @@
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <div class="card card-round shadow-sm">
+                        <div class="card card-round shadow">
                             <div class="card-header">
                                 <div class="card-head-row">
                                     <div class="card-title">Horas</div>

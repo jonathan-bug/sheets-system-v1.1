@@ -1,5 +1,7 @@
 @extends("layout.app")
 
+@section("page-title", "Periodos")
+
 @section("app")
     <x-sidebar current="periods"/>
 
@@ -14,7 +16,7 @@
                     <h3 class="fw-bold mb-3">Gestionar Periodos</h3>
                     <ul class="breadcrumbs mb-3">
                         <li class="nav-home">
-                            <a href="#">
+                            <a href="{{route('dashboard')}}">
                                 <i class="icon-home"></i>
                             </a>
                         </li>
@@ -106,6 +108,11 @@
             success: (response) => {
                 $(".period-title").text(response.loaded.month + " - " + response.loaded.year)
                 fetchPeriods(response.loaded.id)
+                Swal.fire({
+                    title: "¡Exito!",
+                    text: "Cambios Aplicados. Periodo Actual: " + response.loaded.month + " - " + response.loaded.year,
+                    icon: "success"
+                });
             }
         })
     }
@@ -255,11 +262,11 @@
                     if(id) {
                         if(period.id == id) {
                             row += `<button class="btn btn-success btn-icon" onclick="loadPeriod('${period.id}')">`
-                            row += `<i class="fa fa-check"></i>`
+                            row += `<i class="fa fa-square"></i>`
                             row += `</button>`
                         }else {
-                            row += `<button class="btn btn-secondary btn-icon" onclick="loadPeriod('${period.id}')">`
-                            row += `<i class="fa fa-check"></i>`
+                            row += `<button class="btn btn-icon" onclick="loadPeriod('${period.id}')">`
+                            row += `<i class="fa fa-square"></i>`
                             row += `</button>`
                         }
                     }else {
