@@ -100,9 +100,9 @@
                     row += `<td>${sheet.first_name}</td>`
                     row += `<td>${sheet.first_lastname}</td>`
                     row += `<td>$${parseFloat(sheet.salary).toFixed(2)}</td>`
-                    row += `<td>$${parseFloat(sheet.extra_day_hour).toFixed(2)}</td>`
-                    row += `<td>$${parseFloat(sheet.extra_night_hour).toFixed(2)}</td>`
-                    row += `<td>$${parseFloat(sheet.night_hour).toFixed(2)}</td>`
+                    row += `<td>$${parseFloat(sheet.v_extra_day_hour).toFixed(2)}</td>`
+                    row += `<td>$${parseFloat(sheet.v_extra_night_hour).toFixed(2)}</td>`
+                    row += `<td>$${parseFloat(sheet.v_night_hour).toFixed(2)}</td>`
                     row += `<td>$${parseFloat(sheet.v_vacation).toFixed(2)}</td>`
                     row += `<td>$${parseFloat(sheet.v_aguinald).toFixed(2)}</td>`
                     row += `<td>$${parseFloat(sheet.bonuses).toFixed(2)}</td>`
