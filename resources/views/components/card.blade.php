@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row align-items-center">
             <div class="col-icon">
-                <div
+                <div 
                     class="icon-big text-center {{$iconColor}} bubble-shadow-small"
                 >
                     <i class="{{$icon}}"></i>

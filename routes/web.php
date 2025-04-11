@@ -68,9 +68,3 @@ Route::middleware(AuthUser::class)->group(function () {
     // dashboard
     Route::get('/', [DashboardController::class, 'page'])->name('dashboard');
 });
-
-Route::get('/token', function () {
-    return csrf_token();
-});
-
-
