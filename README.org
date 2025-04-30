@@ -1,0 +1,19 @@
+* sheets-system
+The sheets-system was a university project for the generation and control of payment sheets but in this version it has a new UI.
+
+The system also generates printable payment sheets.
+
+** Technologies
+The system was developed using Laravel and the UI is made entirely with a bootstrap modified version.
+
+** Images
+[[./images/img00.png]]
+[[./images/img01.png]]
+[[./images/img02.png]]
+[[./images/img03.png]]
+[[./images/img04.png]]
+[[./images/img05.png]]
+[[./images/img06.png]]
+[[./images/img07.png]]
+[[./images/img08.png]]
+[[./images/img09.png]]
